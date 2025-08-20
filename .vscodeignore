@@ -1,0 +1,24 @@
+.vscode/**
+.vscode-test/**
+node_modules/**
+src/**
+.gitignore
+.yarnrc
+esbuild.js
+vsc-extension-quickstart.md
+**/tsconfig.json
+**/eslint.config.mjs
+**/*.map
+**/*.ts
+**/.vscode-test.*
+
+# bundle modules
+!node_modules/duckdb/*
+!node_modules/duckdb/lib/**
+!node_modules/duckdb/node_modules/**
+!node_modules/@mapbox/node-pre-gyp/**
+!node_modules/consola/**
+!node_modules/semver/**
+!node_modules/detect-libc/**
+!node_modules/cytoscape/dist/cytoscape.min.js
+!node_modules/cytoscape-dagre/cytoscape-dagre.js

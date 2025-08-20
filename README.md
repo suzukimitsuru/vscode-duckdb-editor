@@ -1,2 +1,3 @@
 # vscode-duckdb-editor
-DuckDB Editor
+
+VSCode拡張機能のみで、DuckDBのファイルを編集できるカスタムエディタです。

@@ -1,0 +1,57 @@
+{
+  "name": "vscode-duckdb-editor",
+  "displayName": "DuckDB Editor",
+  "description": "VSCode拡張機能のみで、DuckDBのファイルを編集できるカスタムエディタです。",
+  "version": "0.0.1",
+  "publisher": "suzukimitsuru",
+  "keywords": [
+    "DuckDB",
+    "Editor",
+    "vscode-extension"
+  ],
+  "categories": [
+    "Visualization"
+  ],
+  "homepage": "https://github.com/suzukimitsuru/vscode-duckdb-editor",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/suzukimitsuru/vscode-duckdb-editor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/suzukimitsuru/vscode-duckdb-editor/issues"
+  },
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "customEditors": [
+      {
+        "viewType": "duckdbEditor.duckdb",
+        "displayName": "DuckDB Editor",
+        "selector": [
+          {
+            "filenamePattern": "*.db"
+          },
+          {
+            "filenamePattern": "*.duckdb"
+          }
+        ]
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "duckdb": "^0.9.2"
+  }
+}
