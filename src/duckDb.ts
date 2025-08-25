@@ -31,9 +31,33 @@ export class Db extends vscode.Disposable {
      * @description データベースを破棄する
      */
     public dispose() {
-        this._conn?.close((err?: Error | null) => {});
+        this._conn.close((err?: Error | null) => {});
         this._conn = null as any;
         this._db = null as any;
         super.dispose();    
+    }
+
+    public async listTables(): Promise<string[]> {
+        return new Promise((resolve, reject) => {
+            this._conn.prepare("SHOW TABLES").all((err: Error | null, result: any) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result.map((row: any) => row.name));
+                }
+            });
+        });
+    }
+
+    public async executeQuery(sql: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this._conn.prepare(sql).all((err: Error | null, result: any) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
     }
 }

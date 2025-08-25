@@ -2,7 +2,7 @@
   "name": "vscode-duckdb-editor",
   "displayName": "DuckDB Editor for VSCode",
   "description": "VSCode拡張機能のみで、DuckDBのファイルを編集できるカスタムエディタです。",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "publisher": "suzukimitsuru",
   "keywords": [
     "DuckDB",
@@ -28,7 +28,7 @@
   "contributes": {
     "customEditors": [
       {
-        "viewType": "duckdbEditor.duckdb",
+        "viewType": "duckdbEditor.editor",
         "displayName": "DuckDB Editor",
         "selector": [
           {

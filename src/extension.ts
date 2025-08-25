@@ -1,11 +1,11 @@
 import * as vscode from 'vscode';
-import { DuckDBEditorProvider } from './duckdbEditorProvider';
+import { DbEditorProvider } from './dbEditorProvider';
 
 export function activate(context: vscode.ExtensionContext) {
-    const provider = new DuckDBEditorProvider(context);
+    const provider = new DbEditorProvider(context);
     
     const providerRegistration = vscode.window.registerCustomEditorProvider(
-        DuckDBEditorProvider.viewType, 
+        DbEditorProvider.viewType, 
         provider,
         {
             webviewOptions: {

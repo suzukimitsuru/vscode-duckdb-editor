@@ -1,6 +1,6 @@
 # DuckDB Editor for VSCode
 
-DuckDBファイル（.db, .duckdb）を直接VSCodeで開いて、SQLクエリを実行できるカスタムエディタ拡張機能です。  
+DuckDBファイル(.db, .duckdb)を直接VSCodeで開いて、SQLクエリを実行できるカスタムエディタ拡張機能です。  
 単体で動作します。外部のツールをインストールする必要はありません。  
 
 ![DuckDB Editor Screenshot](media/duckdb-editor-screenshot.png)
@@ -26,7 +26,7 @@ DuckDBファイル（.db, .duckdb）を直接VSCodeで開いて、SQLクエリ�
 開発環境でテストする場合：
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/suzukimitsuru/vscode-duckdb-editor.git
 cd vscode-duckdb-editor
 npm install
 npm run compile

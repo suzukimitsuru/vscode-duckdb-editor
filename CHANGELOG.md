@@ -4,6 +4,39 @@ All notable changes to the "DuckDB Editor for VSCode" extension will be document
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.3] - 2025-08-25
+
+### Added
+
+- ✨ Interactive column resizing with mouse drag functionality
+- 📊 Column width preservation across page navigation
+- 🎯 Text overflow handling with ellipsis (...) for narrow columns
+- 📈 Comma-separated number formatting for record counts and page numbers
+- ⏳ VSCode native progress indicators using withProgress API
+- 🎨 Improved pagination layout with centered record info and right-aligned page info
+
+### Changed
+
+- 🔧 Enhanced table layout to support dynamic width adjustments
+- 📏 Improved column width management with individual column control
+- 🎨 Reduced table row spacing for denser data display
+- 📱 Updated pagination controls with better visual separation
+- ⚡ Replaced HTML progress bars with native VSCode notifications
+
+### Fixed
+
+- 🐛 Fixed column resizing to only affect target column without changing adjacent columns
+- 🔧 Resolved table width issues when columns are resized beyond content width
+- 🎯 Corrected pagination display to show exact specified number of records
+- 📊 Enhanced table scrolling behavior by removing height restrictions
+
+### Technical
+
+- 🏗️ Implemented fixed table layout with dynamic width calculation
+- 💾 Added column width state management with automatic persistence
+- ⚡ Optimized table rendering with improved CSS properties
+- 🔒 Enhanced progress reporting with VSCode extension API integration
+
 ## [0.0.2] - 2025-08-21
 
 ### Added
