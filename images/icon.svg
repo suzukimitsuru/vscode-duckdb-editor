@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 128 128">
+  <!-- Background circle - no background for transparency -->
+  <circle cx="64" cy="64" r="63" fill="#FF6B35" stroke="#E5E5E5" stroke-width="1"/>
+  
+  <!-- Database cylinder base -->
+  <ellipse cx="64" cy="88" rx="38" ry="8" fill="#2A5AA0" opacity="0.8"/>
+  <ellipse cx="64" cy="78" rx="38" ry="8" fill="#3B82F6" opacity="0.9"/>
+  <ellipse cx="64" cy="68" rx="38" ry="8" fill="#60A5FA"/>
+  
+  <!-- Database cylinder sides -->
+  <rect x="26" y="68" width="76" height="20" fill="#3B82F6" opacity="0.7"/>
+  
+  <!-- Duck body -->
+  <ellipse cx="54" cy="48" rx="20" ry="13" fill="#FFD700" stroke="#F59E0B" stroke-width="1"/>
+  
+  <!-- Duck head -->
+  <circle cx="72" cy="38" r="13" fill="#FFD700" stroke="#F59E0B" stroke-width="1"/>
+  
+  <!-- Duck beak -->
+  <ellipse cx="83" cy="38" rx="7" ry="3" fill="#FF8C00"/>
+  
+  <!-- Duck eye -->
+  <circle cx="77" cy="34" r="2" fill="#000000"/>
+  <circle cx="78" cy="33" r="1" fill="#FFFFFF"/>
+  
+  <!-- Duck wing -->
+  <ellipse cx="62" cy="45" rx="9" ry="6" fill="#F59E0B" opacity="0.8"/>
+  
+  <!-- Data lines on database -->
+  <line x1="30" y1="73" x2="98" y2="73" stroke="#FFFFFF" stroke-width="1" opacity="0.6"/>
+  <line x1="30" y1="78" x2="98" y2="78" stroke="#FFFFFF" stroke-width="1" opacity="0.6"/>
+  <line x1="30" y1="83" x2="98" y2="83" stroke="#FFFFFF" stroke-width="1" opacity="0.6"/>
+</svg>

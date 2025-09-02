@@ -49,9 +49,13 @@ export class DbEditorProvider implements vscode.CustomReadonlyEditorProvider {
                             try {
                                 progress.report({ message: "クエリを処理しています..." });
                                 const results = await db.executeQuery(message.sql);
+                                // BigIntを文字列に変換してJSONシリアル化可能にする
+                                const serializedResults = JSON.parse(JSON.stringify(results, (_key, value) =>
+                                    typeof value === 'bigint' ? value.toString() : value
+                                ));
                                 webviewPanel.webview.postMessage({
                                     type: 'queryResult',
-                                    results: results
+                                    results: serializedResults
                                 });
                             } catch (error) {
                                 webviewPanel.webview.postMessage({
@@ -358,11 +362,18 @@ export class DbEditorProvider implements vscode.CustomReadonlyEditorProvider {
                         <span id="pageInfo"></span>
                     </div>
                     <div class="pagination-buttons">
+                        <button class="icon-button" onclick="firstPage()" id="firstBtn" title="最初のページ">
+                            <i class="codicon codicon-chevron-up"></i>
+                        </button>
                         <button class="icon-button" onclick="previousPage()" id="prevBtn" title="前のページ">
                             <i class="codicon codicon-chevron-left"></i>
                         </button>
+                        <input type="number" id="pageInput" min="1" value="1" title="ページ番号" style="width: 60px; margin: 0 5px;" onchange="goToPage()" onkeypress="handlePageInputKeypress(event)">
                         <button class="icon-button" onclick="nextPage()" id="nextBtn" title="次のページ">
                             <i class="codicon codicon-chevron-right"></i>
+                        </button>
+                        <button class="icon-button" onclick="lastPage()" id="lastBtn" title="最後のページ">
+                            <i class="codicon codicon-chevron-down"></i>
                         </button>
                     </div>
                 </div>
@@ -414,6 +425,13 @@ export class DbEditorProvider implements vscode.CustomReadonlyEditorProvider {
             displayResults(currentResults);
         }
         
+        function firstPage() {
+            if (currentPage > 1) {
+                currentPage = 1;
+                displayResults(currentResults);
+            }
+        }
+        
         function previousPage() {
             if (currentPage > 1) {
                 currentPage--;
@@ -426,6 +444,34 @@ export class DbEditorProvider implements vscode.CustomReadonlyEditorProvider {
             if (currentPage < totalPages) {
                 currentPage++;
                 displayResults(currentResults);
+            }
+        }
+        
+        function lastPage() {
+            const totalPages = Math.ceil(currentResults.length / pageSize);
+            if (currentPage < totalPages) {
+                currentPage = totalPages;
+                displayResults(currentResults);
+            }
+        }
+        
+        function goToPage() {
+            const pageInput = document.getElementById('pageInput');
+            const inputPage = parseInt(pageInput.value);
+            const totalPages = Math.ceil(currentResults.length / pageSize);
+            
+            if (inputPage >= 1 && inputPage <= totalPages && inputPage !== currentPage) {
+                currentPage = inputPage;
+                displayResults(currentResults);
+            } else {
+                // 無効な値の場合、現在のページに戻す
+                pageInput.value = currentPage.toString();
+            }
+        }
+        
+        function handlePageInputKeypress(event) {
+            if (event.key === 'Enter') {
+                goToPage();
             }
         }
         
@@ -581,27 +627,35 @@ export class DbEditorProvider implements vscode.CustomReadonlyEditorProvider {
         
         function updatePaginationButtons() {
             const totalPages = Math.ceil(currentResults.length / pageSize);
+            const firstBtn = document.getElementById('firstBtn');
             const prevBtn = document.getElementById('prevBtn');
             const nextBtn = document.getElementById('nextBtn');
+            const lastBtn = document.getElementById('lastBtn');
+            const pageInput = document.getElementById('pageInput');
             
-            prevBtn.disabled = currentPage <= 1;
-            nextBtn.disabled = currentPage >= totalPages;
+            // ページ入力フィールドを更新
+            pageInput.value = currentPage.toString();
+            pageInput.max = totalPages.toString();
             
-            if (prevBtn.disabled) {
-                prevBtn.style.opacity = '0.5';
-                prevBtn.style.cursor = 'not-allowed';
-            } else {
-                prevBtn.style.opacity = '1';
-                prevBtn.style.cursor = 'pointer';
-            }
+            // ボタンの状態を更新
+            const isFirstPage = currentPage <= 1;
+            const isLastPage = currentPage >= totalPages;
             
-            if (nextBtn.disabled) {
-                nextBtn.style.opacity = '0.5';
-                nextBtn.style.cursor = 'not-allowed';
-            } else {
-                nextBtn.style.opacity = '1';
-                nextBtn.style.cursor = 'pointer';
-            }
+            firstBtn.disabled = isFirstPage;
+            prevBtn.disabled = isFirstPage;
+            nextBtn.disabled = isLastPage;
+            lastBtn.disabled = isLastPage;
+            
+            // すべてのボタンのスタイルを更新
+            [firstBtn, prevBtn, nextBtn, lastBtn].forEach(btn => {
+                if (btn.disabled) {
+                    btn.style.opacity = '0.5';
+                    btn.style.cursor = 'not-allowed';
+                } else {
+                    btn.style.opacity = '1';
+                    btn.style.cursor = 'pointer';
+                }
+            });
         }
         
         function displayTables(tables) {

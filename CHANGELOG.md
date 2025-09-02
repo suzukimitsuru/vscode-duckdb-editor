@@ -4,9 +4,42 @@ All notable changes to the "DuckDB Editor for VSCode" extension will be document
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.4] - 2025-09-02
+
+### [0.0.4] Added
+
+- 🎯 Advanced pagination with direct page navigation using input field
+- 🏠 First/Last page buttons for quick navigation to beginning/end
+- ⌨️ Enter key support in page input field for instant page jumps
+- 🎨 Professional extension icon with DuckDB theme (duck + database)
+- ✨ Enhanced pagination controls with 5 navigation options
+- 🔢 Page number validation with automatic correction for invalid inputs
+
+### [0.0.4] Changed
+
+- 🎯 Improved pagination UI with centered page input field
+- 🔧 Enhanced pagination button management with visual state indicators
+- 🎨 Updated pagination controls layout for better user experience
+- 📊 Optimized pagination button spacing and alignment
+
+### [0.0.4] Fixed
+
+- 🐛 Resolved BigInt serialization errors in DuckDB query results
+- 🔧 Fixed TypeScript compilation warnings for unused parameters
+- 🎯 Corrected debugger breakpoint issues by fixing launch.json outFiles path
+- 🖼️ Fixed PNG icon transparency and sizing issues
+
+### [0.0.4] Technical
+
+- 🏗️ Implemented JSON serialization with BigInt-to-string conversion
+- 🔒 Enhanced debugging configuration with proper source mapping
+- ⚡ Added comprehensive page navigation state management
+- 🎨 Created SVG-based icon with professional design and PNG conversion
+- 📦 Updated package.json with extension icon configuration
+
 ## [0.0.3] - 2025-08-25
 
-### Added
+### [0.0.3] Added
 
 - ✨ Interactive column resizing with mouse drag functionality
 - 📊 Column width preservation across page navigation
@@ -15,7 +48,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - ⏳ VSCode native progress indicators using withProgress API
 - 🎨 Improved pagination layout with centered record info and right-aligned page info
 
-### Changed
+### [0.0.3] Changed
 
 - 🔧 Enhanced table layout to support dynamic width adjustments
 - 📏 Improved column width management with individual column control
@@ -23,14 +56,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - 📱 Updated pagination controls with better visual separation
 - ⚡ Replaced HTML progress bars with native VSCode notifications
 
-### Fixed
+### [0.0.3] Fixed
 
 - 🐛 Fixed column resizing to only affect target column without changing adjacent columns
 - 🔧 Resolved table width issues when columns are resized beyond content width
 - 🎯 Corrected pagination display to show exact specified number of records
 - 📊 Enhanced table scrolling behavior by removing height restrictions
 
-### Technical
+### [0.0.3] Technical
 
 - 🏗️ Implemented fixed table layout with dynamic width calculation
 - 💾 Added column width state management with automatic persistence
@@ -39,7 +72,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [0.0.2] - 2025-08-21
 
-### Added
+### [0.0.2] Added
 
 - ✨ Pagination functionality with configurable page sizes (10, 25, 50, 100 records)
 - 🔄 Refresh button for table list updates
@@ -48,7 +81,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - 🎨 Improved UI layout with icon-only buttons
 - 📱 Responsive design with flex layout
 
-### Changed
+### [0.0.2] Changed
 
 - 🎯 Moved refresh button to left of tables list
 - 🔧 Repositioned execute/clear buttons to left of query input (vertical layout)
@@ -56,13 +89,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - 🖼️ Updated to use local codicon resources instead of CDN
 - 📋 Enhanced table display with fixed headers during scroll
 
-### Fixed
+### [0.0.2] Fixed
 
 - 🐛 Resolved vsce package errors by fixing .vscodeignore configuration
 - 🔧 Fixed TypeScript compilation warnings for unused variables
 - 🎨 Corrected CustomTextEditorProvider to CustomReadonlyEditorProvider for binary files
 
-### Technical
+### [0.0.2] Technical
 
 - 🏗️ Implemented proper webview URI handling for local resources
 - 📦 Added codicon.css and codicon.ttf to local media assets
@@ -71,7 +104,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 
 ## [0.0.1] - 2025-08-21
 
-### Added
+### [0.0.1] Added
 
 - 🎉 Initial release of DuckDB Editor for VSCode
 - 📂 Custom editor for .db and .duckdb files
@@ -81,7 +114,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 - 🗃️ DuckDB database connection and query handling
 - 🏗️ Basic extension infrastructure with TypeScript
 
-### Features
+### [0.0.1] Features
 
 - 🔍 Browse database tables
 - ⚡ Execute SQL queries in real-time
