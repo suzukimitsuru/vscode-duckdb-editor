@@ -363,7 +363,7 @@ export class DbEditorProvider implements vscode.CustomReadonlyEditorProvider {
                     </div>
                     <div class="pagination-buttons">
                         <button class="icon-button" onclick="firstPage()" id="firstBtn" title="最初のページ">
-                            <i class="codicon codicon-chevron-up"></i>
+                            <i class="codicon codicon-triangle-left"></i>
                         </button>
                         <button class="icon-button" onclick="previousPage()" id="prevBtn" title="前のページ">
                             <i class="codicon codicon-chevron-left"></i>
@@ -373,7 +373,7 @@ export class DbEditorProvider implements vscode.CustomReadonlyEditorProvider {
                             <i class="codicon codicon-chevron-right"></i>
                         </button>
                         <button class="icon-button" onclick="lastPage()" id="lastBtn" title="最後のページ">
-                            <i class="codicon codicon-chevron-down"></i>
+                            <i class="codicon codicon-triangle-right"></i>
                         </button>
                     </div>
                 </div>
