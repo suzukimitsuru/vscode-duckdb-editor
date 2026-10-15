@@ -1,4 +1,4 @@
-// プラットフォーム別の VSIX を作る (README.md の「VSIX の作成」)
+// プラットフォーム別の VSIX を作る (docs/marketplace-platform-specific.md)
 //
 //   node scripts/package-vsix.mjs                 全ターゲット
 //   node scripts/package-vsix.mjs linux-x64 ...   指定したターゲットだけ
@@ -20,7 +20,7 @@ const VSCE = '@vscode/vsce@4.0.0';
 // vsce の engines は ">= 22" だが、22.11 以前では ERR_REQUIRE_ESM で落ちる
 const [nodeMajor, nodeMinor] = process.versions.node.split('.').map(Number);
 if (nodeMajor < 22 || (nodeMajor === 22 && nodeMinor < 12)) {
-    console.error(`Node.js ${process.versions.node} では ${VSCE} を実行できません。Node.js 22.12.0 以上に更新して下さい (README.md の「VSIX の作成」)`);
+    console.error(`Node.js ${process.versions.node} では ${VSCE} を実行できません。Node.js 22.12.0 以上に更新して下さい (docs/marketplace-platform-specific.md)`);
     process.exit(1);
 }
 

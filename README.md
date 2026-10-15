@@ -47,6 +47,9 @@ node scripts/package-vsix.mjs darwin-arm64 linux-x64
 
 `vsix/` に `vscode-duckdb-editor-<version>-<target>.vsix` が作られます。
 
+GitHub Actions（`.github/workflows/package-vsix.yml`）でも全ターゲットの VSIX を作り、手動実行で `publish` を選ぶと Visual Studio Marketplace に公開します。
+認証の準備と公開の手順は [docs/marketplace-platform-specific.md](docs/marketplace-platform-specific.md) を参照して下さい。
+
 ## 使い方
 
 1. **DuckDBファイルを開く**

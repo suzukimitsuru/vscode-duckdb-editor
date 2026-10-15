@@ -18,6 +18,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/) and this p
 ### [0.0.6] Added
 
 - 🛠️ `scripts/package-vsix.mjs`（`npm run package`）: ターゲットごとに DuckDB のバイナリを npm から取得して入れ替え、`vsce package --target` で VSIX を作る
+- 🚀 `.github/workflows/package-vsix.yml`: 全ターゲットの VSIX を作って成果物にする。手動実行で `publish` を選ぶと Visual Studio Marketplace に公開する（Microsoft Entra ID か PAT）。手順は `docs/marketplace-platform-specific.md`
 
 ### [0.0.6] Removed
 

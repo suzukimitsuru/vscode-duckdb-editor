@@ -4,6 +4,8 @@ node_modules/**
 src/**
 scripts/**
 .claude/**
+.github/**
+docs/**
 vsix/**
 *.vsix
 .gitignore
