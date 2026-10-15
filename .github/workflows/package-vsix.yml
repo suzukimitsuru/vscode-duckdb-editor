@@ -1,0 +1,96 @@
+name: Package platform-specific VSIX
+
+# プラットフォーム別の VSIX を作り、手動実行で publish を選んだときだけ Visual Studio Marketplace に公開する。
+# 手順と認証の準備は docs/marketplace-platform-specific.md を参照
+on:
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Visual Studio Marketplace に公開する'
+        type: boolean
+        default: false
+  push:
+    branches:
+      - main
+  pull_request:
+    paths:
+      - '.github/workflows/package-vsix.yml'
+      - '.vscodeignore'
+      - 'package.json'
+      - 'scripts/package-vsix.mjs'
+      - 'src/duckDb.ts'
+      - 'tsconfig.json'
+
+jobs:
+  package:
+    name: Package VSIX for all targets
+    # DuckDB のバイナリは npm から取得するため、全ターゲットを Linux の1ジョブで作れる
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+
+      # @vscode/vsce 4 は Node.js 22.12.0 以上が必要 (22 は 22 系の最新版になる)
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      # ロックファイルはコミットしていないため npm ci ではなく npm install を使う
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Compile
+        run: npm run compile
+
+      - name: Package VSIX
+        run: node scripts/package-vsix.mjs
+
+      - name: List VSIX
+        run: ls -lh vsix/
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: vsix
+          path: vsix/*.vsix
+          retention-days: 30
+
+  publish:
+    name: Publish to Visual Studio Marketplace
+    needs: package
+    if: github.event_name == 'workflow_dispatch' && inputs.publish
+    runs-on: ubuntu-24.04
+    # 公開の承認や秘密情報は environment にまとめる
+    environment: marketplace
+    permissions:
+      contents: read
+      id-token: write   # Microsoft Entra ID のフェデレーション認証 (OIDC) に使う
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: vsix
+          path: vsix
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      # Microsoft Entra ID で認証する (推奨。Azure DevOps のグローバル PAT は 2026-12-01 に廃止される)
+      - name: Azure login (Microsoft Entra ID)
+        if: vars.AZURE_CLIENT_ID != ''
+        uses: azure/login@v3
+        with:
+          client-id: ${{ vars.AZURE_CLIENT_ID }}
+          tenant-id: ${{ vars.AZURE_TENANT_ID }}
+          allow-no-subscriptions: true
+
+      - name: Publish (Microsoft Entra ID)
+        if: vars.AZURE_CLIENT_ID != ''
+        run: npx --yes @vscode/vsce@4.0.0 publish --azure-credential --skip-duplicate --packagePath vsix/*.vsix
+
+      # Entra ID を設定していない場合は PAT (secrets.VSCE_PAT) で公開する
+      - name: Publish (Personal Access Token)
+        if: vars.AZURE_CLIENT_ID == ''
+        run: npx --yes @vscode/vsce@4.0.0 publish --skip-duplicate --packagePath vsix/*.vsix
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}

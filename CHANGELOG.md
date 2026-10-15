@@ -4,6 +4,32 @@ All notable changes to the "DuckDB Editor for VSCode" extension will be document
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/) and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.0.6] - 2026-10-16
+
+### [0.0.6] Changed
+
+- 🦆 DuckDB を 1.5 に上げ、クライアントを `@duckdb/node-api`（1.5.6-r.1）に替えた: `duckdb` パッケージは 1.4.4 で更新が止まり、DuckDB 1.4 LTS は 2026-11-17 にサポートが終わるため
+- 📦 VSIX をプラットフォーム別にした: `win32-x64` / `win32-arm64` / `linux-x64` / `linux-arm64` / `alpine-x64` / `alpine-arm64` / `darwin-x64` / `darwin-arm64` の 8 種類。各 VSIX は対象プラットフォームの DuckDB のバイナリだけを含む（24〜36MB）
+  - Windows arm64・macOS Intel・Linux arm64・Alpine Linux（musl）でも使えるようになった
+- 🔢 クエリ結果の BIGINT・HUGEINT・DECIMAL・日時は DuckDB の表記の文字列で表示する
+- 📝 複数の文を `;` で区切って実行すると、前から順に実行して最後の文の結果を表示する
+- 🔁 クエリは呼んだ順に1つずつ実行する。同じファイルを複数のエディタで開いても衝突しないよう、インスタンスキャッシュから開く
+
+### [0.0.6] Added
+
+- 🛠️ `scripts/package-vsix.mjs`（`npm run package`）: ターゲットごとに DuckDB のバイナリを npm から取得して入れ替え、`vsce package --target` で VSIX を作る
+- 🚀 `.github/workflows/package-vsix.yml`: 全ターゲットの VSIX を作って成果物にする。手動実行で `publish` を選ぶと Visual Studio Marketplace に公開する（Microsoft Entra ID か PAT）。手順は `docs/marketplace-platform-specific.md`
+
+### [0.0.6] Removed
+
+- 🗑️ 自前ビルドの DuckDB バインディング `bindings/`（約 140MB）。DuckDB が npm で配布する署名済みのバイナリを使う
+
+## [0.0.5] - 2026-10-16
+
+### [0.0.5] Changed
+
+- 🎨 最初/最後のページボタンのアイコンを `triangle-left` / `triangle-right` に変更
+
 ## [0.0.4] - 2025-09-02
 
 ### [0.0.4] Added
