@@ -5,3 +5,8 @@ node_modules
 *.vsix
 extension
 .DS_Store
+vsix
+# iCloud Drive の同期から外した実体 (node_modules・vsix はここへのシンボリックリンク)
+*.nosync
+package-lock.json
+yarn.lock

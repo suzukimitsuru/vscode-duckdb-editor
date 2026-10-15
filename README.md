@@ -33,6 +33,23 @@ npm run compile
 # F5キーでExtension Development Hostを起動
 ```
 
+### VSIX の作成
+
+DuckDB のネイティブバイナリはプラットフォームごとに異なるため、VSIX はプラットフォーム別に作ります。
+`@vscode/vsce` 4 を使うため、Node.js 22.12.0 以上が必要です。
+
+```bash
+# 全ターゲット（win32-x64 / win32-arm64 / linux-x64 / linux-arm64 / alpine-x64 / alpine-arm64 / darwin-x64 / darwin-arm64）
+npm run package
+# 一部のターゲットだけ
+node scripts/package-vsix.mjs darwin-arm64 linux-x64
+```
+
+`vsix/` に `vscode-duckdb-editor-<version>-<target>.vsix` が作られます。
+
+GitHub Actions（`.github/workflows/package-vsix.yml`）でも全ターゲットの VSIX を作り、手動実行で `publish` を選ぶと Visual Studio Marketplace に公開します。
+認証の準備と公開の手順は [docs/marketplace-platform-specific.md](docs/marketplace-platform-specific.md) を参照して下さい。
+
 ## 使い方
 
 1. **DuckDBファイルを開く**
@@ -61,7 +78,9 @@ npm run compile
 ## 要件
 
 - Visual Studio Code 1.74.0以上
-- Node.js（開発時）
+- プラットフォーム: Windows（x64 / arm64）、macOS（x64 / arm64）、Linux（x64 / arm64、glibc と musl）
+- DuckDB 1.5（拡張機能に同梱）
+- Node.js 22.12.0以上（開発時）
 
 ## ライセンス
 
