@@ -6,7 +6,9 @@ scripts/**
 .claude/**
 .github/**
 docs/**
+vsix
 vsix/**
+*.nosync/**
 *.vsix
 .gitignore
 .yarnrc
