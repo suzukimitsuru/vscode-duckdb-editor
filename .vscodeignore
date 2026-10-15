@@ -2,6 +2,10 @@
 .vscode-test/**
 node_modules/**
 src/**
+scripts/**
+.claude/**
+vsix/**
+*.vsix
 .gitignore
 .yarnrc
 esbuild.js
@@ -13,12 +17,8 @@ vsc-extension-quickstart.md
 **/.vscode-test.*
 
 # bundle modules
-!node_modules/duckdb/*
-!node_modules/duckdb/lib/**
-!node_modules/duckdb/node_modules/**
-!node_modules/@mapbox/node-pre-gyp/**
-!node_modules/consola/**
-!node_modules/semver/**
+# DuckDB (プラットフォーム別 VSIX には対象プラットフォームのネイティブバイナリだけを入れる。scripts/package-vsix.mjs)
+!node_modules/@duckdb/node-api/**
+!node_modules/@duckdb/node-bindings/**
+!node_modules/@duckdb/node-bindings-*/**
 !node_modules/detect-libc/**
-!node_modules/cytoscape/dist/cytoscape.min.js
-!node_modules/cytoscape-dagre/cytoscape-dagre.js

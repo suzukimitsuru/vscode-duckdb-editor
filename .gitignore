@@ -5,3 +5,6 @@ node_modules
 *.vsix
 extension
 .DS_Store
+vsix/
+package-lock.json
+yarn.lock

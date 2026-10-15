@@ -48,14 +48,11 @@ export class DbEditorProvider implements vscode.CustomReadonlyEditorProvider {
                         }, async (progress) => {
                             try {
                                 progress.report({ message: "クエリを処理しています..." });
+                                // 結果は JSON の値 (BIGINT などは文字列) なので、そのまま Webview へ送れる
                                 const results = await db.executeQuery(message.sql);
-                                // BigIntを文字列に変換してJSONシリアル化可能にする
-                                const serializedResults = JSON.parse(JSON.stringify(results, (_key, value) =>
-                                    typeof value === 'bigint' ? value.toString() : value
-                                ));
                                 webviewPanel.webview.postMessage({
                                     type: 'queryResult',
-                                    results: serializedResults
+                                    results: results
                                 });
                             } catch (error) {
                                 webviewPanel.webview.postMessage({
